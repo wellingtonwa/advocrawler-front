@@ -68,7 +68,16 @@ const Diligencia = props => {
             method: 'POST',
             headers: jsonHeader,
             body: JSON.stringify(state.selecionados)
-        });
+        }).then(async resp => {
+            const url = window.URL.createObjectURL(await resp.blob());
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'excel.xlsx'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+            dispatch({type: 'toggle-loading'});
+        })
+        .catch((error) => console.log(error));
     }
 
     return <>
@@ -83,7 +92,7 @@ const Diligencia = props => {
                     <Column selectionMode="multiple" style={{width:'4em'}}/>
                     <Column field="descricao" header="Nome Diligência" sortable={true}/>
                 </DataTable>
-                {state.diligencias && state.selecionados && <Button label="Buscar informações" onClick={buscarInformacao}/>}
+                {state.diligencias && state.selecionados && <Button label="Buscar informações" onClick={buscarInformacao} disabled={state.loading}/>}
             </div>
         </div>
     </>
