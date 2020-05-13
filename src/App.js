@@ -13,7 +13,7 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
-import Diligencia from './components/Diligencia';
+import DiligenciaView from './components/DiligenciaView';
 
 class App extends Component {
 
@@ -145,7 +145,7 @@ class App extends Component {
 
                 <div className="layout-main">
                     <Route path="/" exact component={Dashboard} />
-                    <Route path="/diligencias" component={Diligencia} />
+                    <Route path="/diligencias" component={DiligenciaView} />
                 </div>
 
                 <div className="layout-mask"></div>
